@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Hospitals Infographic</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e8f5e8 0%, #f0f8ff 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .infographic {
+            max-width: 1080px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2e8b57 0%, #228b22 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="30" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="60" cy="70" r="2.5" fill="rgba(255,255,255,0.1)"/><circle cx="30" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .main-title {
+            font-size: 2.5em;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .section {
+            padding: 30px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .section:nth-child(even) {
+            background: #f8fffe;
+            border-left: 1px solid #e0e0e0;
+        }
+
+        .section-title {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #2e8b57;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            background: #2e8b57;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .problem-stat {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .problem-number {
+            font-size: 2em;
+            font-weight: 800;
+            color: #f44336;
+            margin-bottom: 5px;
+        }
+
+        .areas-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .area-item {
+            background: linear-gradient(135deg, #e8f5e8 0%, #d4edda 100%);
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 3px solid #28a745;
+            transition: transform 0.2s;
+        }
+
+        .area-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .area-name {
+            font-weight: 600;
+            color: #155724;
+            margin-bottom: 5px;
+        }
+
+        .area-example {
+            font-size: 0.85em;
+            color: #666;
+            line-height: 1.3;
+        }
+
+        .benefits-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .benefit-category {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-left: 4px solid;
+        }
+
+        .benefit-category.environmental {
+            border-left-color: #28a745;
+        }
+
+        .benefit-category.health {
+            border-left-color: #007bff;
+        }
+
+        .benefit-category.economic {
+            border-left-color: #ffc107;
+        }
+
+        .benefit-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .benefit-title.environmental {
+            color: #28a745;
+        }
+
+        .benefit-title.health {
+            color: #007bff;
+        }
+
+        .benefit-title.economic {
+            color: #e68900;
+        }
+
+        .benefit-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .stat-badge {
+            background: #f8f9fa;
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+
+        .examples-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .example-item {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-left: 4px solid;
+            position: relative;
+        }
+
+        .example-item.high-resource {
+            border-left-color: #6f42c1;
+        }
+
+        .example-item.middle-resource {
+            border-left-color: #fd7e14;
+        }
+
+        .example-item.low-resource {
+            border-left-color: #20c997;
+        }
+
+        .example-setting {
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 1em;
+        }
+
+        .example-setting.high-resource {
+            color: #6f42c1;
+        }
+
+        .example-setting.middle-resource {
+            color: #fd7e14;
+        }
+
+        .example-setting.low-resource {
+            color: #20c997;
+        }
+
+        .example-detail {
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .definition-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid #2196f3;
+            margin: 10px 0;
+        }
+
+        .definition-text {
+            font-size: 1.1em;
+            color: #1565c0;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .definition-purpose {
+            font-size: 0.95em;
+            color: #424242;
+            font-style: italic;
+        }
+
+        .impact-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .impact-item {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 3px solid #ff9800;
+            text-align: center;
+            font-weight: 500;
+            color: #e65100;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #263238 0%, #37474f 100%);
+            color: white;
+            padding: 20px 30px;
+            text-align: center;
+        }
+
+        .footer-text {
+            font-size: 1em;
+            margin-bottom: 8px;
+        }
+
+        .author-info {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section:nth-child(even) {
+                border-left: none;
+                border-top: 1px solid #e0e0e0;
+            }
+            
+            .main-title {
+                font-size: 2em;
+            }
+            
+            .areas-grid,
+            .impact-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="infographic">
+        <div class="header">
+            <div class="header-content">
+                <h1 class="main-title">🏥 GREEN HOSPITALS</h1>
+                <p class="subtitle">Maximizing Health & Climate Benefits Globally</p>
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <!-- Problem Section -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="icon">⚠️</span>
+                    THE CHALLENGE
+                </h2>
+                <div class="problem-stat">
+                    <div class="problem-number">4.4%</div>
+                    <p>of global emissions come from healthcare</p>
+                    <p><strong>= 514 coal-fired power plants</strong></p>
+                </div>
+                <p style="margin-top: 15px; color: #666; font-style: italic;">
+                    Climate change worsens the health issues healthcare aims to solve
+                </p>
+            </div>
+
+            <!-- Definition Section -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="icon">🌱</span>
+                    WHAT ARE GREEN HOSPITALS?
+                </h2>
+                <div class="definition-box">
+                    <p class="definition-text">
+                        Healthcare facilities that prioritize environmental sustainability alongside patient care
+                    </p>
+                    <p class="definition-purpose">
+                        Transform healthcare from climate contributor to climate leader
+                    </p>
+                </div>
+            </div>
+
+            <!-- Key Areas Section -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="icon">🔄</span>
+                    6 KEY AREAS OF ACTION
+                </h2>
+                <div class="areas-grid">
+                    <div class="area-item">
+                        <div class="area-name">⚡ Energy Efficiency</div>
+                        <div class="area-example">AI systems, solar power, passive design</div>
+                    </div>
+                    <div class="area-item">
+                        <div class="area-name">♻️ Waste Management</div>
+                        <div class="area-example">Circular economy, recycling</div>
+                    </div>
+                    <div class="area-item">
+                        <div class="area-name">💧 Water Sustainability</div>
+                        <div class="area-example">Rainwater harvesting, reclamation</div>
+                    </div>
+                    <div class="area-item">
+                        <div class="area-name">📦 Supply Chain</div>
+                        <div class="area-example">Local procurement, green standards</div>
+                    </div>
+                    <div class="area-item">
+                        <div class="area-name">💻 Telemedicine</div>
+                        <div class="area-example">Remote care, reduced travel</div>
+                    </div>
+                    <div class="area-item">
+                        <div class="area-name">🌿 Biophilic Design</div>
+                        <div class="area-example">Green spaces, natural cooling</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Benefits Section -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="icon">📈</span>
+                    TRIPLE BENEFITS
+                </h2>
+                <div class="benefits-container">
+                    <div class="benefit-category environmental">
+                        <div class="benefit-title environmental">🌍 Environmental</div>
+                        <div class="benefit-stats">
+                            <span class="stat-badge">25-70% emissions ↓</span>
+                            <span class="stat-badge">Reduced waste</span>
+                            <span class="stat-badge">Carbon sequestration</span>
+                        </div>
+                    </div>
+                    <div class="benefit-category health">
+                        <div class="benefit-title health">🏥 Health</div>
+                        <div class="benefit-stats">
+                            <span class="stat-badge">Better outcomes</span>
+                            <span class="stat-badge">Improved air quality</span>
+                            <span class="stat-badge">Enhanced resilience</span>
+                        </div>
+                    </div>
+                    <div class="benefit-category economic">
+                        <div class="benefit-title economic">💰 Economic</div>
+                        <div class="benefit-stats">
+                            <span class="stat-badge">$2M annual savings</span>
+                            <span class="stat-badge">30-35% energy ↓</span>
+                            <span class="stat-badge">Lower costs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Examples Section -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="icon">🌏</span>
+                    REAL EXAMPLES GLOBALLY
+                </h2>
+                <div class="examples-list">
+                    <div class="example-item high-resource">
+                        <div class="example-setting high-resource">🏢 High-Resource</div>
+                        <div class="example-detail">
+                            <strong>Gundersen Health (USA):</strong> Energy independent, $2M annual savings
+                        </div>
+                    </div>
+                    <div class="example-item middle-resource">
+                        <div class="example-setting middle-resource">🏭 Middle-Resource</div>
+                        <div class="example-detail">
+                            <strong>Kohinoor Hospital (India):</strong> First LEED Platinum in Asia
+                        </div>
+                    </div>
+                    <div class="example-item low-resource">
+                        <div class="example-setting low-resource">🌱 Low-Resource</div>
+                        <div class="example-detail">
+                            <strong>India:</strong> 900 solar-powered health centers deployed
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Impact Section -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="icon">🚀</span>
+                    GLOBAL IMPACT POTENTIAL
+                </h2>
+                <div class="impact-list">
+                    <div class="impact-item">Transform 4.4% of global emissions</div>
+                    <div class="impact-item">Enhance climate resilience</div>
+                    <div class="impact-item">Advance health equity</div>
+                    <div class="impact-item">Support UN SDGs</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p class="footer-text">🌟 <strong>The future of healthcare is green, resilient, and equitable</strong></p>
+            <p class="author-info">Based on research by David Rojas-Rueda | Science of the Total Environment (2025)</p>
+        </div>
+    </div>
+</body>
+</html>
